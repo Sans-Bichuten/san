@@ -1,0 +1,21 @@
+# Secure Uploads Directory
+# Block directory listing
+Options -Indexes
+
+# Disable script execution for all files in this folder
+RemoveHandler .php .phtml .php3 .php4 .php5 .php7 .phps .pl .py .cgi .asp .aspx .shtml
+AddType text/plain .php .phtml .php3 .php4 .php5 .php7 .phps .pl .py .cgi .asp .aspx .shtml
+
+# Explicitly deny access to PHP scripts
+<FilesMatch "\.(php|phtml|php3|php4|php5|php7|phps|pl|py|cgi|asp|aspx|shtml)$">
+    Order Deny,Allow
+    Deny from all
+</FilesMatch>
+
+# Block direct access to .bin resume files (served only via download-resume.php)
+<FilesMatch "\.bin$">
+    Order Deny,Allow
+    Deny from all
+</FilesMatch>
+
+# Images and other media files are publicly accessible (needed for blog/case study images)

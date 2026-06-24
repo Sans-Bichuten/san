@@ -1,0 +1,9 @@
+# Bichuten Backend — Security Headers
+# Block directory listing to prevent folder structure exposure
+Options -Indexes
+
+# Block access to sensitive files
+<FilesMatch "\.(sql|log|env|bak|md|json)$">
+    Order Deny,Allow
+    Deny from all
+</FilesMatch>
